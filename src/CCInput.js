@@ -93,6 +93,7 @@ export default class CCInput extends Component {
           {!!label && <Text style={[labelStyle]}>{label}</Text>}
           <TextInput
             ref="input"
+            maxLength={19}
             {...additionalInputProps}
             keyboardType={keyboardType}
             autoCapitalise="words"

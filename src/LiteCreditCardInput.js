@@ -13,55 +13,46 @@ import { TextInputPropTypes } from "deprecated-react-native-prop-types";
 import Icons from "./Icons";
 import CCInput from "./CCInput";
 import { InjectedProps } from "./connectToState";
+import theme from "~/styles/theme";
+
 
 const INFINITE_WIDTH = 1000;
 
 const s = StyleSheet.create({
   container: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    overflow: "hidden",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  viewIcon: {
+    backgroundColor: "transparent",
+    padding: theme.metrics.perfectSize(8),
   },
   icon: {
-    width: 48,
-    height: 40,
+    width: 40,
+    height: 32,
     resizeMode: "contain",
   },
-  expanded: {
-    flex: 1,
-  },
-  hidden: {
-    width: 0,
-  },
-  leftPart: {
-    overflow: "hidden",
-  },
-  rightPart: {
-    overflow: "hidden",
+  cardInput: {
+    display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: theme.metrics.perfectSize(16),
+    backgroundColor: theme.$colors.background,
+    borderRadius: theme.metrics.perfectSize(8),
+    height: theme.metrics.baseInputHeight,
   },
-  last4: {
+  CCNumberInput: {
+    backgroundColor: theme.$colors.background,
+    borderRadius: theme.metrics.perfectSize(8),
+    paddingLeft: theme.metrics.perfectSize(12),
+    paddingRight: theme.metrics.perfectSize(12),
+    height: theme.metrics.baseInputHeight,
     flex: 1,
-    justifyContent: "center",
+    backgroundColor: "transparent",
   },
-  numberInput: {
-    width: INFINITE_WIDTH,
-  },
-  expiryInput: {
-    width: 80,
-  },
-  cvcInput: {
-    width: 80,
-  },
-  last4Input: {
-    width: 60,
-    marginLeft: 20,
-  },
-  input: {
-    height: 40,
-    color: "black",
+  viewCCNumberInput: {
+    flex: 1,
   },
 });
 
@@ -168,44 +159,17 @@ export default class LiteCreditCardInput extends Component {
 
     return (
       <View style={s.container}>
-        <View style={[s.leftPart, showRightPart ? s.hidden : s.expanded]}>
+        <View style={s.cardInput}>
           <CCInput
             {...this._inputProps("number")}
             keyboardType="numeric"
-            containerStyle={s.numberInput}
+            inputStyle={s.CCNumberInput}
+            placeholderColor={theme.$colors.neutralsDark2}
+            containerStyle={s.viewCCNumberInput}
           />
-        </View>
-        <TouchableOpacity
-          onPress={showRightPart ? this._focusNumber : this._focusExpiry}
-        >
-          <Image style={s.icon} source={Icons[this._iconToShow()]} />
-        </TouchableOpacity>
-        <View style={[s.rightPart, showRightPart ? s.expanded : s.hidden]}>
-          <TouchableOpacity onPress={this._focusNumber} style={s.last4}>
-            <View pointerEvents={"none"}>
-              <CCInput
-                field="last4"
-                keyboardType="numeric"
-                value={
-                  numberStatus === "valid"
-                    ? number.substr(number.length - 4, 4)
-                    : ""
-                }
-                inputStyle={[s.input, inputStyle]}
-                containerStyle={[s.last4Input]}
-              />
-            </View>
-          </TouchableOpacity>
-          <CCInput
-            {...this._inputProps("expiry")}
-            keyboardType="numeric"
-            containerStyle={s.expiryInput}
-          />
-          <CCInput
-            {...this._inputProps("cvc")}
-            keyboardType="numeric"
-            containerStyle={s.cvcInput}
-          />
+          <View style={s.viewIcon}>
+            <Image style={s.icon} source={Icons[this._iconToShow()]} />
+          </View>
         </View>
       </View>
     );
