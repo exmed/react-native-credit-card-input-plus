@@ -10,7 +10,7 @@ const addGaps = (string = "", gaps) => {
     .map((end, index) => {
       if (index === 0) return "";
       const start = offsets[index - 1];
-      return string.substring(start, end - start);
+      return string.substr(start, end - start);
     })
     .filter((part) => part !== "")
     .join(" ");

@@ -13,10 +13,6 @@ import { TextInputPropTypes } from "deprecated-react-native-prop-types";
 import Icons from "./Icons";
 import CCInput from "./CCInput";
 import { InjectedProps } from "./connectToState";
-import theme from "~/styles/theme";
-
-
-const INFINITE_WIDTH = 1000;
 
 const s = StyleSheet.create({
   container: {
@@ -25,7 +21,7 @@ const s = StyleSheet.create({
   },
   viewIcon: {
     backgroundColor: "transparent",
-    padding: theme.metrics.perfectSize(8),
+    padding: 8,
   },
   icon: {
     width: 40,
@@ -37,17 +33,17 @@ const s = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: theme.metrics.perfectSize(16),
-    backgroundColor: theme.$colors.background,
-    borderRadius: theme.metrics.perfectSize(8),
-    height: theme.metrics.baseInputHeight,
+    marginBottom: 16,
+    backgroundColor: "#f6f6f6",
+    borderRadius: 8,
+    height: 50,
   },
   CCNumberInput: {
-    backgroundColor: theme.$colors.background,
-    borderRadius: theme.metrics.perfectSize(8),
-    paddingLeft: theme.metrics.perfectSize(12),
-    paddingRight: theme.metrics.perfectSize(12),
-    height: theme.metrics.baseInputHeight,
+    backgroundColor: "#f6f6f6",
+    borderRadius: 8,
+    paddingLeft: 12,
+    paddingRight: 12,
+    height: 50,
     flex: 1,
     backgroundColor: "transparent",
   },
@@ -164,7 +160,7 @@ export default class LiteCreditCardInput extends Component {
             {...this._inputProps("number")}
             keyboardType="numeric"
             inputStyle={s.CCNumberInput}
-            placeholderColor={theme.$colors.neutralsDark2}
+            placeholderColor="#545356"
             containerStyle={s.viewCCNumberInput}
           />
           <View style={s.viewIcon}>
